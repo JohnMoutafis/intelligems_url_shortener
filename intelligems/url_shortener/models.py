@@ -25,3 +25,12 @@ class ShortenedUrls(models.Model):
     class Meta:
         verbose_name = 'Shortened URL'
         verbose_name_plural = 'Shortened URLs'
+
+    def save(self, *args, **kwargs):
+        """
+        On save, update the shortened_url's `in_use` field to True.
+        """
+        instance = super().save(*args, **kwargs)
+        self.shortened_url.in_use = True
+        self.shortened_url.save()
+        return instance

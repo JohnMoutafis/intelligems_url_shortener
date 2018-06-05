@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
+
+from intelligems.url_shortener.views import ShortenUrlView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('url_shortener/', csrf_exempt(ShortenUrlView.as_view()))
 ]
