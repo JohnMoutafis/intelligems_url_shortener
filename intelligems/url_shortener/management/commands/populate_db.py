@@ -1,9 +1,9 @@
 from django.core.management import BaseCommand
 
-from intelligems.settings import path, SITE_URL
+from intelligems.settings import path
 from intelligems.url_shortener.models import AvailableUrls
 
-INITIAL_WORDLIST = path('intelligems', 'url_shortener', 'initial_resources', 'wordlist.txt')
+INITIAL_WORDLIST = path('initial_resources', 'wordlist.txt')
 
 
 def initialize_available_urls():
@@ -12,9 +12,8 @@ def initialize_available_urls():
     """
     with open(INITIAL_WORDLIST, 'r') as f:
         for word in f.readlines():
-            url = '{}/{}'.format(SITE_URL, word.strip())
             print('Adding {} to the database.'.format(word.strip()))
-            AvailableUrls.objects.create(url=url)
+            AvailableUrls.objects.create(url=word.strip())
 
 
 class Command(BaseCommand):

@@ -21,5 +21,5 @@ from intelligems.url_shortener.views import ShortenUrlView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('url_shortener/', csrf_exempt(ShortenUrlView.as_view()))
+    path('url_shortener/', csrf_exempt(ShortenUrlView.as_view()), name='url_shortener')
 ]
